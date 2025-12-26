@@ -6,8 +6,8 @@ export default function LoginPage() {
     const { setUsername } = useContext(AppContext);
     const navigate = useNavigate();
     const [name, setName] = useState("");
-    function handleSubmit(submit) {
-        submit.preventDefault();
+    function handleSubmit(event) {
+        event.preventDefault();
         if (!name.trim()) return;
         setUsername(name);
         navigate("/chat");
@@ -17,7 +17,7 @@ export default function LoginPage() {
             <h1>Wpisz swój nick</h1>
             <input
                 value={name}
-                onChange={(submit) => setName(submit.target.value)}
+                onChange={(event) => setName(event.target.value)}
                 placeholder="Twój nick"
             />
             <button type="submit">Wejdź</button>
