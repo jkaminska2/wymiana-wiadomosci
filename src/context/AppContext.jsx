@@ -7,9 +7,9 @@ export function AppProvider({ children }) {
     const [username, setUsername] = useLocalStorage("username", "");
     const [status, setStatus] = useLocalStorage("status", "Dostępny");
     const [conversations, setConversations] = useLocalStorage("conversations", {
-        "Bot": []
+        "Adam": []
     });
-    const [currentChat, setCurrentChat] = useState("Bot");
+    const [currentChat, setCurrentChat] = useState("Adam");
     const [showTime, setShowTime] = useLocalStorage("showTime", true)
     function login(name) {
         setUsername(name)

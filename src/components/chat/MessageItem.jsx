@@ -1,10 +1,11 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { AppContext } from "../../context/AppContext";
 
 export default function MessageItem({ message }) {
     const { editMessage, showTime, currentChat } = useContext(AppContext);
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(message.text);
+    const inputRef = useRef(null)
     useEffect(() => {
         setText(message.text);
     }, [message.text]);
@@ -13,12 +14,17 @@ export default function MessageItem({ message }) {
         editMessage(currentChat, message.id, text);
         setIsEditing(false);
     }
+    function cancel() {
+        setText(message.text);
+        setIsEditing(false);
+    }
     return (
-        <li onClick={() => message.author === "me" && setIsEditing(true)}>
+        <li>
             <strong>{message.author}: </strong>
             {isEditing ? (
                 <>
-                    <input 
+                    <input
+                        ref={inputRef}
                         value={text} 
                         onChange={event => setText(event.target.value)} 
                         onKeyDown={event => {
@@ -28,19 +34,29 @@ export default function MessageItem({ message }) {
                             }
                         }}
                     />
-                    <button 
-                        onClick={(event) => {
-                            event.stopPropagation();
-                            save();
-                        }}
-                    >
+                    <button onClick={() => save()}>
                         Zapisz
+                    </button>
+                    <button onClick={() => cancel()}>
+                        Anuluj
                     </button>
                 </>
             ) : (
                 <>
                     {message.text}
                     {message.edited && <em> (edytowano)</em>}
+                    {message.author === "me" && (
+                        <button
+                            onClick={(event) => {
+                                setIsEditing(true);
+                                setTimeout(() => {
+                                    inputRef.current?.focus();
+                                }, 0);
+                            }}
+                        >
+                            Edytuj
+                        </button>
+                    )}
                 </>
             )}
             {showTime && (
