@@ -9,8 +9,8 @@ export function AppProvider({ children }) {
     function login(name) {
         setUsername(name)
     }
-    function addMessage(text) {
-        setMessages((prev) => [...prev, { text, author: "me" }]);
+    function addMessage(text, author = "me") {
+        setMessages((prev) => [...prev, { text, author }]);
     }
     return (
         <AppContext.Provider value={{ username, login, messages, addMessage}}>
