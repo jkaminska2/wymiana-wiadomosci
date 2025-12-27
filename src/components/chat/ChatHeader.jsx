@@ -1,7 +1,9 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/AppContext"
 
 export default function ChatHeader() {
+    const navigate = useNavigate();
     const { username, status, setStatus } = useContext(AppContext);
     return (
         <header style={{ padding: "10px", borderBottom: "1px solid black" }}>
@@ -14,6 +16,9 @@ export default function ChatHeader() {
                     <option>Niedostępny</option>
                 </select>
             </label>
+            <button onClick={() => navigate("/settings")}>
+                Ustawienia
+            </button>
         </header>
     );
 }

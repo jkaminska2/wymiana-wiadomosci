@@ -15,36 +15,36 @@ export function AppProvider({ children }) {
         setUsername(name)
     }
     function addContact(name) {
-        if (!conversations[name]) {
-            setConversations({
-                ...conversations,
-                [name]: []
-            });
-        }
+        setConversations(prev => {
+            if (prev[name]) return prev;
+            return {
+                ...prev, [name]: []
+            };
+        });
     }
-    function addMessage(text, author = "me") {
+    function addMessage(chatName, text, author = "me") {
         setConversations((prev) => ({
             ...prev,
-            [currentChat]: [
-                ...prev[currentChat],
-                { text, author, edited: false, time: Date.now() }
+            [chatName]: [
+                ...(prev[chatName] || []),
+                { id: Date.now() + Math.random(), text, author, edited: false, time: Date.now() }
             ]
         }));
     }
-    function editMessage(index, newText) {
+    function editMessage(chatName, messageId, newText) {
         setConversations(prev => {
-            const updated = [...prev[currentChat]];
-            updated[index] = {
-                ...updated[index],
-                text: newText,
-                edited: true
-            };
-            return { ...prev, [currentChat]: updated };
+            const updatedChat = prev[chatName].map(msg =>
+                msg.id === messageId
+                    ? { ...msg, text: newText, edited: true }
+                    : msg
+            );
+            return { ...prev, [chatName]: updatedChat };
         });
     }
     return (
         <AppContext.Provider value={{
             username,
+            setUsername,
             login,
             status,
             setStatus,

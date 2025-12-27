@@ -8,7 +8,7 @@ import useChatBot from "../hooks/useChatBot";
 
 export default function ChatPage() {
     const { conversations, currentChat } = useContext(AppContext);
-    const messages = conversations[currentChat] || [];
+    const messages = conversations[currentChat] ?? [];
     useChatBot();
     return (
         <div style={{ display: "flex", height: "100vh" }}>

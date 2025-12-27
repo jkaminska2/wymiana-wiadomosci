@@ -18,7 +18,7 @@ export default function useChatBot() {
         if (lastMessage.author !== "me") return;
         const timeout = setTimeout(() => {
             const random = BOT_MESSAGES[Math.floor(Math.random() * BOT_MESSAGES.length)];
-            addMessage(random, "bot");
+            addMessage(currentChat, random, "bot");
         }, 1500);
         return () => clearTimeout(timeout);
     }, [conversations, currentChat, addMessage]);

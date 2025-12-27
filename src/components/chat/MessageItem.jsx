@@ -1,13 +1,16 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 
-export default function MessageItem({ message, index }) {
-    const { editMessage, showTime } = useContext(AppContext);
+export default function MessageItem({ message }) {
+    const { editMessage, showTime, currentChat } = useContext(AppContext);
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(message.text);
+    useEffect(() => {
+        setText(message.text);
+    }, [message.text]);
     function save() {
         if (!text.trim()) return;
-        editMessage(index, text);
+        editMessage(currentChat, message.id, text);
         setIsEditing(false);
     }
     return (
@@ -15,8 +18,24 @@ export default function MessageItem({ message, index }) {
             <strong>{message.author}: </strong>
             {isEditing ? (
                 <>
-                    <input value={text} onChange={event => setText(event.target.value)} />
-                    <button onClick={save}>Zapisz</button>
+                    <input 
+                        value={text} 
+                        onChange={event => setText(event.target.value)} 
+                        onKeyDown={event => {
+                            if (event.key === "Enter") {
+                                event.preventDefault();
+                                save();
+                            }
+                        }}
+                    />
+                    <button 
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            save();
+                        }}
+                    >
+                        Zapisz
+                    </button>
                 </>
             ) : (
                 <>
