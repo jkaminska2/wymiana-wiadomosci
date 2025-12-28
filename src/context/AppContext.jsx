@@ -5,7 +5,7 @@ export const AppContext = createContext();
 
 export function AppProvider({ children }) {
     const [username, setUsername] = useLocalStorage("username", "");
-    const [status, setStatus] = useLocalStorage("status", "Dostępny");
+    const [status, setStatus] = useLocalStorage("status", "dostępny");
     const [conversations, setConversations] = useLocalStorage("conversations", {
         "Adam": []
     });
@@ -22,7 +22,7 @@ export function AppProvider({ children }) {
             };
         });
     }
-    function addMessage(chatName, text, author = "me") {
+    function addMessage(chatName, text, author = username) {
         setConversations((prev) => ({
             ...prev,
             [chatName]: [
