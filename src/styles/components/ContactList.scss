@@ -2,12 +2,21 @@
 @use "sass:color";
 
 .contact-list {
-    width: 250px;
+    width: 0;
     border-right: $border;
     padding: 10px;
     background: white;
     display: flex;
     flex-direction: column;
+    width: 0;
+    overflow: hidden;
+    transition: width 0.28s cubic-bezier(0.25, 0.1, 0.25, 1),
+        box-shadow 0.28s ease;
+
+    &.open{
+        width: 260px;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+    }
 
     h3 {
         margin: 0 0 10px 0;
