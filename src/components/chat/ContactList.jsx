@@ -7,7 +7,7 @@ import "../../styles/components/ContactList.scss";
 
 export default function ContactList() {
     const { conversations, addContact } = useContext(ConversationsContext);
-    const { currentChat, setCurrentChat } = useContext(ChatContext);
+    const { currentChat, setCurrentChat, isContactsOpen } = useContext(ChatContext);
     const { username, status } = useContext(UserContext);
     const [newName, setNewName] = useState("");
     function handleAdd() {
@@ -16,7 +16,7 @@ export default function ContactList() {
         setNewName("");
     }
     return (
-        <aside className="contact-list">
+        <aside className={`contact-list ${isContactsOpen ? "open" : ""}`}>
             <h3>Kontakty</h3>
             <ul>
                 {Object.keys(conversations).map(name => (

@@ -1,0 +1,52 @@
+.chat-layout {
+    display: flex;
+    height: calc(100vh - 64px);
+    overflow: hidden;
+}
+
+.contact-list {
+    width: 260px;
+    flex-shrink: 0;
+    border-right: 1px solid #ddd;
+    background: white;
+    height: 100%;
+    overflow-y: auto;
+}
+
+
+.contact-list.open {
+    transform: translateX(0);
+}
+
+
+.message-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .contact-list {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 260px;
+        height: calc(100% - 64px);
+        background: white;
+        z-index: 20;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+    }
+
+    .contact-list.open {
+        transform: translateX(0);
+    }
+
+    .message-area {
+        flex: 1;
+        width: 100%;
+    }
+}

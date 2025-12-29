@@ -2,7 +2,9 @@
 
 .avatar {
     position: relative;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .circle {
         border-radius: 50%;

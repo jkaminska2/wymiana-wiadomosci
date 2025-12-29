@@ -1,18 +1,26 @@
 import React, { useContext, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
+import { ChatContext } from "../../context/ChatContext";
 import Avatar from "../avatar/Avatar";
 import "../../styles/components/ChatHeader.scss";
 
 function ChatHeader() {
     const navigate = useNavigate();
     const { username, status, setStatus } = useContext(UserContext);
+    const { setIsContactsOpen } = useContext(ChatContext);
     const goToSettings = useCallback(() => {
         navigate("/settings");
     }, [navigate]);
     return (
         <header className="chat-header">
             <div className="left-side">
+                <button
+                    className="toggle-contacts"
+                    onClick={() => setIsContactsOpen(prev => !prev)}
+                >
+                    ☰
+                </button>
                 <Avatar name={username || "U"} size={40} status={status} />
                 <div className="user-info">
                     <h2>{username}</h2>
