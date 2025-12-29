@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "../../styles/components/EmojiPicker.scss";
 
-export default function EmojiPicker({ onSelect }) {
+function EmojiPicker({ onSelect }) {
     const [emojiList, setEmojiList] = useState([]);
     const [open, setOpen] = useState(false);
     useEffect(() => {
@@ -16,9 +16,16 @@ export default function EmojiPicker({ onSelect }) {
         }
         loadEmoji();
     }, []);
+    const toggleOpen = useCallback(() => {
+        setOpen(prev => !prev);
+    }, []);
+    const handleSelect = useCallback((emoji) => {
+        onSelect(emoji);
+        setOpen(false)
+    },[onSelect]);
     return (
         <div className="emoji-picker">
-            <button type="button" className="emoji-button" onClick={() => setOpen(!open)}>
+            <button type="button" className="emoji-button" onClick={toggleOpen}>
                 🙂
             </button>
             {open && (
@@ -26,10 +33,7 @@ export default function EmojiPicker({ onSelect }) {
                     {emojiList.map((emoji) => (
                         <span
                             key={emoji.slug}
-                            onClick={() => {
-                                onSelect(emoji.character);
-                                setOpen(false);
-                            }}
+                            onClick={() => handleSelect(emoji.character)}
                         >
                             {emoji.character}
                         </span>
@@ -39,3 +43,5 @@ export default function EmojiPicker({ onSelect }) {
         </div>
     );
 }
+
+export default React.memo(EmojiPicker);

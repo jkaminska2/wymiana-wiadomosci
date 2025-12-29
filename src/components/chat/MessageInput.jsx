@@ -1,5 +1,5 @@
-import { useState, useContext, useRef } from "react";
-import { AppContext } from "../../context/AppContext";
+import { useState, useContext, useRef, useCallback } from "react";
+import { AppContext } from "../../context/AppProvider";
 import EmojiPicker from "./EmojiPicker";
 import "../../styles/components/MessageInput.scss";
 
@@ -7,18 +7,16 @@ export default function MessageInput() {
     const [message, setMessage] = useState("");
     const { addMessage, currentChat } = useContext(AppContext);
     const inputRef = useRef(null);
-    function handleSubmit(event) {
+    const handleSubmit = useCallback((event) => {
         event.preventDefault();
         if (!message.trim()) return;
         addMessage(currentChat, message);
         setMessage("");
-    }
-    function handleEmoji(emoji) {
+    }, [message, currentChat, addMessage]);
+    const handleEmoji = useCallback((emoji) => {
         setMessage(prev => prev + emoji);
-        if (inputRef.current) {
-            inputRef.current.focus();
-        }
-    }
+        inputRef.current?.focus();
+    }, []);
     return (
         <form className="message-input" onSubmit={handleSubmit}>
             <input 

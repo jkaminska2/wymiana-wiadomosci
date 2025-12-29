@@ -1,6 +1,7 @@
+import React from "react";
 import "../../styles/components/Avatar.scss";
 
-export default function Avatar({ name, size = 32, status = "online" }) {
+function Avatar({ name, size = 32, status = "online" }) {
     const initial = name.charAt(0).toUpperCase();
     const colors = ["#FF6B6B", "#4ECDC4", "#556270", "#C7F464", "#78E193ff", "#4A90E2"];
     const color = colors[name.charCodeAt(0) * name.length % colors.length];
@@ -30,3 +31,5 @@ export default function Avatar({ name, size = 32, status = "online" }) {
         </div>
     );
 }
+
+export default React.memo(Avatar);

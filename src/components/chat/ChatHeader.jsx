@@ -1,12 +1,15 @@
-import { useContext } from "react";
+import React, { useContext, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../../context/AppContext"
+import { AppContext } from "../../context/AppProvider"
 import Avatar from "../avatar/Avatar";
 import "../../styles/components/ChatHeader.scss";
 
-export default function ChatHeader() {
+function ChatHeader() {
     const navigate = useNavigate();
     const { username, status, setStatus } = useContext(AppContext);
+    const goToSettings = useCallback(() => {
+        navigate("/settings");
+    }, [navigate]);
     return (
         <header className="chat-header">
             <div className="left-side">
@@ -23,9 +26,11 @@ export default function ChatHeader() {
                     </label>
                 </div>
             </div>
-            <button className="settings-button" onClick={() => navigate("/settings")}>
+            <button className="settings-button" onClick={goToSettings}>
                 Ustawienia
             </button>
         </header>
     );
 }
+
+export default React.memo(ChatHeader);

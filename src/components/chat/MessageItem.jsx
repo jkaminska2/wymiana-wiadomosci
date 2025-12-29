@@ -1,9 +1,10 @@
+import React from "react";
 import { useState, useContext, useEffect, useRef } from "react";
-import { AppContext } from "../../context/AppContext";
+import { AppContext } from "../../context/AppProvider";
 import Avatar from "../avatar/Avatar";
 import "../../styles/components/MessageItem.scss";
 
-export default function MessageItem({ message }) {
+function MessageItem({ message }) {
     const { editMessage, showTime, currentChat, username } = useContext(AppContext);
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(message.text);
@@ -35,7 +36,7 @@ export default function MessageItem({ message }) {
                             setTimeout(() => inputRef.current?.focus(), 0);
                         }}
                     >
-                            Edytuj
+                        Edytuj
                     </button>
                 )}
                 <div className="message">
@@ -78,3 +79,5 @@ export default function MessageItem({ message }) {
         </li>
     );
 }
+
+export default React.memo(MessageItem);

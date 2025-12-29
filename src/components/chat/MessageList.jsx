@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import MessageItem from "./MessageItem";
 import "../../styles/components/MessageList.scss";
 
-export default function MessageList({ messages }) {
+function MessageList({ messages }) {
     const bottomRef = useRef(null);
     const lastMessageId = useRef(null);
     useEffect(() => {
@@ -24,3 +24,5 @@ export default function MessageList({ messages }) {
         </div>
     );
 }
+
+export default React.memo(MessageList);
