@@ -1,7 +1,10 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
+import { handleError } from "../../errors/errorHandler";
+import { ErrorContext } from "../../context/ErrorContext";
 import "../../styles/components/EmojiPicker.scss";
 
 function EmojiPicker({ onSelect }) {
+    const { pushError } = useContext(ErrorContext);
     const [emojiList, setEmojiList] = useState([]);
     const [open, setOpen] = useState(false);
     useEffect(() => {
@@ -11,10 +14,12 @@ function EmojiPicker({ onSelect }) {
                 const data = await res.json();
                 setEmojiList(data.slice(0,100));
             } catch (err) {
-                console.error("Błąd pobierania emoji:", err);
+                const error = handleError("Nie udało się pobrać emoji", err);
+                pushError(error);
             }
         }
         loadEmoji();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const toggleOpen = useCallback(() => {
         setOpen(prev => !prev);
