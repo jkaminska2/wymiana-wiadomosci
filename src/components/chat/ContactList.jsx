@@ -17,31 +17,33 @@ export default function ContactList() {
     }
     return (
         <aside className={`contact-list ${isContactsOpen ? "open" : ""}`}>
-            <h3>Kontakty</h3>
-            <ul>
-                {Object.keys(conversations).map(name => (
-                    <li
-                        key={name}
-                        className={name === currentChat ? "active" : ""}
-                        onClick={() => setCurrentChat(name)}
-                    >
-                        <Avatar name={name} size={32} status={name === username ? status : "dostępny"} />
-                        {name}
-                    </li>
-                ))}
-            </ul>
-            <div>
-                <input
-                    value={newName}
-                    onChange={event => setNewName(event.target.value)}
-                    onKeyDown={event => {
-                        if (event.key === "Enter") {
-                            handleAdd();
-                        }
-                    }}
-                    placeholder="Nowy kontakt"
-                />
-                <button onClick={handleAdd}>Dodaj</button>
+            <div className="contact-list-inner">
+                <h3>Kontakty</h3>
+                <ul>
+                    {Object.keys(conversations).map(name => (
+                        <li
+                            key={name}
+                            className={name === currentChat ? "active" : ""}
+                            onClick={() => setCurrentChat(name)}
+                        >
+                            <Avatar name={name} size={32} status={name === username ? status : "dostępny"} />
+                            {name}
+                        </li>
+                    ))}
+                </ul>
+                <div>
+                    <input
+                        value={newName}
+                        onChange={event => setNewName(event.target.value)}
+                        onKeyDown={event => {
+                            if (event.key === "Enter") {
+                                handleAdd();
+                            }
+                        }}
+                        placeholder="Nowy kontakt"
+                    />
+                    <button onClick={handleAdd}>Dodaj</button>
+                </div>
             </div>
         </aside>
     );
