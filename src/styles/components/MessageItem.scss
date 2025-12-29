@@ -1,2 +1,120 @@
 @import "../variables";
 
+.message-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+
+    &.mine {
+        justify-content: flex-end;
+
+        .message {
+            background: $blue;
+            color: white;
+            border-radius: $radius $radius 4px $radius;
+        }
+
+        .info {
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+
+        .top-edit {
+            align-self: flex-end;
+        }
+    }
+
+    &.theirs {
+        justify-content: flex-start;
+        
+        .avatar {
+            margin-top: 6px;
+        }
+
+        .message {
+            background: $gray;
+            color: black;
+            border-radius: $radius $radius $radius 4px;
+        }
+
+        .info {
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+    }
+}
+
+.chat-side {
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+}
+
+.message {
+    padding: 8px 12px;
+    white-space: pre-wrap;
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.info {
+    display: flex;
+    gap: 8px;
+    margin-top: 2px;
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+.top-edit {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 11px;
+    opacity: 0.7;
+    margin-bottom: 4px;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.edit-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    input {
+        padding: 6px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    .edit-buttons {
+        display: flex;
+        gap: 6px;
+
+        button {
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+
+            &:first-child {
+                background: $blue;
+                color: white;
+            }
+
+            &:last-child {
+                background: #ccc;
+            }
+        }
+    }
+}
+
+.edited {
+    font-style: italic;
+    opacity: 0.7;
+    margin-left: 4px;
+}

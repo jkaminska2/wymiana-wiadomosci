@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../../styles/components/EmojiPicker.scss";
 
 export default function EmojiPicker({ onSelect }) {
     const [emojiList, setEmojiList] = useState([]);
@@ -16,32 +17,15 @@ export default function EmojiPicker({ onSelect }) {
         loadEmoji();
     }, []);
     return (
-        <div style={{ position: "relative" }}>
-            <button type="button" onClick={() => setOpen(!open)}>
+        <div className="emoji-picker">
+            <button type="button" className="emoji-button" onClick={() => setOpen(!open)}>
                 🙂
             </button>
             {open && (
-                <div
-                    style={{
-                        position: "absolute",
-                        bottom: "40px",
-                        left: 0,
-                        background: "white",
-                        border: "1px solid #ccc",
-                        padding: "10px",
-                        width: "200px",
-                        height: "150px",
-                        overflowY: "scroll",
-                        display: "grid",
-                        gridTemplateColumns: "repeat(6, 1fr)",
-                        gap: "5px",
-                        zIndex: 10
-                    }}
-                >
+                <div className="emoji-panel">
                     {emojiList.map((emoji) => (
                         <span
                             key={emoji.slug}
-                            style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
                                 onSelect(emoji.character);
                                 setOpen(false);

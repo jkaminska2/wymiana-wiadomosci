@@ -22,49 +22,29 @@ export default function MessageItem({ message }) {
         setIsEditing(false);
     }
     return (
-        <li className={`message-item ${isMine ? "mine" : "theirs"}`}
-            style={{ 
-                display: "flex", 
-                alignItems: "center",
-                justifyContent: isMine ? "flex-end" : "flex-start",
-                gap: "8px",
-                marginBottom: "12px" 
-            }}
-        >
+        <li className={`message-item ${isMine ? "mine" : "theirs"}`}>
             {!isMine && (
-                <div style={{alignSelf: "flex-end" }}>
-                    <Avatar
-                        name={message.author}
-                        size={32}
-                        status="dostępny"
-                    />
-                </div>
+                <Avatar name={message.author} size={32} status="dostępny" />
             )}
-            <div className="chat-side" style={{ maxWidth: "60%", display: "flex", flexDirection: "column" }}>
-                <div classname="message"
-                    style={{
-                        background: isMine ? "#0084FF" : "#E4E6EB",
-                        color: isMine ? "white" : "black",
-                        padding: "8px 12px",
-                        borderRadius: "18px",
-                        borderBottomLeftRadius: isMine ? "18px" : "4px",
-                        borderBottomRightRadius: isMine ? "4px" : "18px",
-                        whiteSpace: "pre-wrap",
-                        position: "relative"
-                    }}
-                >
+            <div className="chat-side">
+                {isMine && !isEditing && (
+                    <button 
+                        className="edit-button top-edit"
+                        onClick={() => {
+                            setIsEditing(true);
+                            setTimeout(() => inputRef.current?.focus(), 0);
+                        }}
+                    >
+                            Edytuj
+                    </button>
+                )}
+                <div className="message">
                     {isEditing ? (
-                        <div className="edit-mode" style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                        <div className="edit-mode">
                             <input
                                 ref={inputRef}
                                 value={text} 
                                 onChange={event => setText(event.target.value)} 
-                                style={{
-                                    padding: "6px",
-                                    borderRadius: "8px",
-                                    border: "1px solid #ccc",
-                                    fontSize: "14px"
-                                }}
                                 onKeyDown={event => {
                                     if (event.key === "Enter") {
                                         event.preventDefault();
@@ -72,60 +52,26 @@ export default function MessageItem({ message }) {
                                     }
                                 }}
                             />
-                            <div className="edit-buttons" style={{ display: "flex", gap: "6px" }}>
-                                <button 
-                                    onClick={save}
-                                    style={{
-                                        padding: "4px 8px",
-                                        background: "#0084FF",
-                                        color: "white",
-                                        border: "none",
-                                        borderRadius: "6px",
-                                        cursor: "pointer"
-                                    }}
-                                >
-                                    Zapisz
-                                </button>
-                                <button 
-                                    onClick={cancel}
-                                    style={{
-                                        padding: "4px 8px",
-                                        background: "#ccc",
-                                        border: "none",
-                                        borderRadius: "6px",
-                                        cursor: "pointer"
-                                    }}
-                                >
-                                    Anuluj
-                                </button>
+                            <div className="edit-buttons">
+                                <button onClick={save}>Zapisz</button>
+                                <button onClick={cancel}>Anuluj</button>
                             </div>
                         </div>
                     ) : (
                         <>
                             {message.text}
-                            {message.edited && <em style={{ opacity: 0.7, marginLeft: "4px" }}> (edytowano)</em>}
+                            {message.edited && <em className="edited">(edytowano)</em>}
                         </>
                     )}
                 </div>
                 <div className="info">
                     {showTime && (
-                        <span className="time" style={{ fontSize: "10px", opacity: 0.6, marginTop: "2px", alignSelft: isMine ? "flex-end" : "flex-start" }}>
+                        <span className="time">
                             {new Date(message.time).toLocaleTimeString("pl-PL", {
                                 hour: "2-digit",
                                 minute: "2-digit"
                             })}
                         </span>
-                    )}
-                    {isMine && !isEditing && (
-                        <button className="edit-button"
-                            onClick={() => {
-                                setIsEditing(true);
-                                setTimeout(() => inputRef.current?.focus(), 0);
-                            }}
-                            style={{ marginTop: "4px", fontSize: "11px", opacity: 0.7, background: "none", border: "none", cursor: "pointer", alignSelf: "flex-end" }}
-                        >
-                            Edytuj
-                        </button>
                     )}
                 </div>
             </div>

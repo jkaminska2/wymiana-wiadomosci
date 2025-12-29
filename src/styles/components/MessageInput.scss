@@ -1,0 +1,44 @@
+@import "../variables";
+
+.message-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    background: white;
+
+    input {
+        flex: 1;
+        padding: 10px 14px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        outline: none;
+
+        &:focus {
+            border-color: $blue;
+        }
+    }
+
+    .send-button {
+        background: $blue;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover {
+            background: darken($blue, 10%);
+        }
+    }
+
+    .emoji-toggle {
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+        padding: 0 6px;
+    }
+}

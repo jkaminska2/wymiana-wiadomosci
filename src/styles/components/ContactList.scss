@@ -1,0 +1,57 @@
+@import "../variables";
+
+.contact-list {
+    width: 250px;
+    border-right: $border;
+    padding: 10px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+        margin-top: 0;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 0;
+        cursor: pointer;
+
+        &:hover {
+            background: $light-gray;
+        }
+
+        &.active {
+            font-weight: bold;
+        }
+    }
+
+    input {
+        width: 100%;
+        padding: 6px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        margin-top: 10px;
+    }
+
+    button {
+        margin-top: 6px;
+        width: 100%;
+        padding: 6px;
+        border-radius: 6px;
+        border: none;
+        background: $blue;
+        color: white;
+        font-weight: 600;
+    }
+}
