@@ -44,6 +44,23 @@
             background: color.adjust($blue, $lightness: -10%);
         }
     }
+    .logout-button {
+        margin-top: 20px;
+        margin-left: 10px;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 8px;
+        background: #d9534f;
+        color: white;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: #c9302c;
+        }
+    }
 }
 
 .loading {

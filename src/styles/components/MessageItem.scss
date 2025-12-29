@@ -49,6 +49,21 @@
     display: flex;
     flex-direction: column;
     max-width: 60%;
+    
+    .edit-button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        opacity: 0.4;
+        transition: opacity 0.2s ease, transform 0.15s ease;
+        padding: 4px;
+
+        &:hover {
+            opacity: 1;
+            transform: scale(1.15);
+        }
+    }
 }
 
 .message {
@@ -111,6 +126,14 @@
             }
         }
     }
+}
+
+.message-item.mine .edit-button {
+    opacity: 0
+}
+    
+.message-item.mine:hover .edit-button {
+    opacity: 0.4;
 }
 
 .edited {

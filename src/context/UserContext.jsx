@@ -9,6 +9,10 @@ export function UserProvider({ children }) {
     function login(name) {
         setUsername(name);
     }
+    function logout() {
+        localStorage.clear();
+        setUsername("");
+    }
     return (
         <UserContext.Provider value={{
             username,
@@ -17,7 +21,8 @@ export function UserProvider({ children }) {
             status,
             setStatus,
             showTime,
-            setShowTime
+            setShowTime,
+            logout
         }}>
             {children}
         </UserContext.Provider>

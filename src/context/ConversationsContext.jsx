@@ -37,12 +37,18 @@ export function ConversationsProvider({ children }) {
             return { ...prev, [chatName]: updatedChat };
         });
     }
+    function resetConversations() {
+        const initial = { Adam: [] };
+        setConversations(initial);
+        localStorage.setItem("conversations", JSON.stringify(initial));
+    }
     return (
         <ConversationsContext.Provider value={{
             conversations,
             addContact,
             addMessage,
-            editMessage
+            editMessage,
+            resetConversations
         }}>
             {children}
         </ConversationsContext.Provider>

@@ -40,7 +40,7 @@ function MessageItem({ message }) {
                             setTimeout(() => inputRef.current?.focus(), 0);
                         }}
                     >
-                        Edytuj
+                        ✏️
                     </button>
                 )}
                 <div className="message">
