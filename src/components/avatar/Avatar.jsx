@@ -1,3 +1,5 @@
+import "../../styles/components/Avatar.scss";
+
 export default function Avatar({ name, size = 32, status = "online" }) {
     const initial = name.charAt(0).toUpperCase();
     const colors = ["#FF6B6B", "#4ECDC4", "#556270", "#C7F464", "#78E193ff", "#4A90E2"];
@@ -9,32 +11,20 @@ export default function Avatar({ name, size = 32, status = "online" }) {
     };
     const statusColor = statusColors[status] || "#9E9E9E";
     return (
-        <div style={{ position: "relative", display: "inline-block" }}>
-            <div style={{
+        <div className="avatar">
+            <div className="circle" style={{
                 width: size,
                 height: size,
-                borderRadius: "50%",
                 backgroundColor: color,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: size * 0.5,
-                marginRight: "10px"
+                fontSize: size * 0.5
             }}>
             {initial}
             </div>
-            <span 
+            <span className="status-dot"
                 style={{
-                    position: "absolute",
-                    bottom: 0,
-                    right: 0,
                     width: size * 0.35,
                     height: size * 0.35,
                     backgroundColor: statusColor,
-                    borderRadius: "50%",
-                    border: "2px solid white"
                 }}
             />
         </div>

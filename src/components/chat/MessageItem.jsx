@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import { AppContext } from "../../context/AppContext";
 import Avatar from "../avatar/Avatar";
+import "../../styles/components/MessageItem.scss";
 
 export default function MessageItem({ message }) {
     const { editMessage, showTime, currentChat, username } = useContext(AppContext);
@@ -21,7 +22,7 @@ export default function MessageItem({ message }) {
         setIsEditing(false);
     }
     return (
-        <li 
+        <li className={`message-item ${isMine ? "mine" : "theirs"}`}
             style={{ 
                 display: "flex", 
                 alignItems: "center",
@@ -39,8 +40,8 @@ export default function MessageItem({ message }) {
                     />
                 </div>
             )}
-            <div style={{ maxWidth: "60%", display: "flex", flexDirection: "column" }}>
-                <div
+            <div className="chat-side" style={{ maxWidth: "60%", display: "flex", flexDirection: "column" }}>
+                <div classname="message"
                     style={{
                         background: isMine ? "#0084FF" : "#E4E6EB",
                         color: isMine ? "white" : "black",
@@ -53,7 +54,7 @@ export default function MessageItem({ message }) {
                     }}
                 >
                     {isEditing ? (
-                        <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                        <div className="edit-mode" style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                             <input
                                 ref={inputRef}
                                 value={text} 
@@ -71,7 +72,7 @@ export default function MessageItem({ message }) {
                                     }
                                 }}
                             />
-                            <div style={{ display: "flex", gap: "6px" }}>
+                            <div className="edit-buttons" style={{ display: "flex", gap: "6px" }}>
                                 <button 
                                     onClick={save}
                                     style={{
@@ -106,25 +107,27 @@ export default function MessageItem({ message }) {
                         </>
                     )}
                 </div>
-                {showTime && (
-                    <span style={{ fontSize: "10px", opacity: 0.6, marginTop: "2px", alignSelft: isMine ? "flex-end" : "flex-start" }}>
-                        {new Date(message.time).toLocaleTimeString("pl-PL", {
-                            hour: "2-digit",
-                            minute: "2-digit"
-                        })}
-                    </span>
-                )}
-                {isMine && !isEditing && (
-                    <button
-                        onClick={() => {
-                            setIsEditing(true);
-                            setTimeout(() => inputRef.current?.focus(), 0);
-                        }}
-                        style={{ marginTop: "4px", fontSize: "11px", opacity: 0.7, background: "none", border: "none", cursor: "pointer", alignSelf: "flex-end" }}
-                    >
-                        Edytuj
-                    </button>
-                )}
+                <div className="info">
+                    {showTime && (
+                        <span className="time" style={{ fontSize: "10px", opacity: 0.6, marginTop: "2px", alignSelft: isMine ? "flex-end" : "flex-start" }}>
+                            {new Date(message.time).toLocaleTimeString("pl-PL", {
+                                hour: "2-digit",
+                                minute: "2-digit"
+                            })}
+                        </span>
+                    )}
+                    {isMine && !isEditing && (
+                        <button className="edit-button"
+                            onClick={() => {
+                                setIsEditing(true);
+                                setTimeout(() => inputRef.current?.focus(), 0);
+                            }}
+                            style={{ marginTop: "4px", fontSize: "11px", opacity: 0.7, background: "none", border: "none", cursor: "pointer", alignSelf: "flex-end" }}
+                        >
+                            Edytuj
+                        </button>
+                    )}
+                </div>
             </div>
         </li>
     );
