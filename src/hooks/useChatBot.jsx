@@ -1,5 +1,7 @@
 import { useEffect, useContext } from "react";
-import { AppContext } from "../context/AppContext";
+import { ConversationsContext } from "../context/ConversationsContext";
+import { UserContext } from "../context/UserContext";
+import { ChatContext } from "../context/ChatContext";
 
 const BOT_MESSAGES = [
     "Super!",
@@ -10,7 +12,9 @@ const BOT_MESSAGES = [
     "Okej"
 ];
 export default function useChatBot() {
-    const { conversations, currentChat, addMessage, username } = useContext(AppContext);
+    const { conversations, addMessage } = useContext(ConversationsContext);
+    const { currentChat } = useContext(ChatContext);
+    const { username } = useContext(UserContext);
     useEffect(() => {
         const last = conversations[currentChat]?.slice(-1)[0];
         if (!last || last.author !== username) return;

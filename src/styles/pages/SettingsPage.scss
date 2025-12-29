@@ -1,0 +1,54 @@
+@use "../variables" as *;
+@use "sass:color";
+
+.settings-page {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+    h1 {
+        margin: 0 0 20px 0;
+        font-size: 22px;
+        font-weight: 600;
+        color: #222;
+    }
+
+    label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 15px;
+        margin-bottom: 20px;
+
+        input[type="checkbox"] {
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+    }
+
+    button {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 8px;
+        background: $blue;
+        color: white;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: color.adjust($blue, $lightness: -10%);
+        }
+    }
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #555;
+}

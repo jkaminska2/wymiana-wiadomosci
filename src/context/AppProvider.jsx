@@ -1,63 +1,15 @@
-import { createContext, useState } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
+import { UserProvider } from "./UserContext";
+import { ChatProvider } from "./ChatContext";
+import { ConversationsProvider } from "./ConversationsContext";
 
-export const AppContext = createContext();
-
-export function AppProvider({ children }) {
-    const [username, setUsername] = useLocalStorage("username", "");
-    const [status, setStatus] = useLocalStorage("status", "dostępny");
-    const [conversations, setConversations] = useLocalStorage("conversations", {
-        "Adam": []
-    });
-    const [currentChat, setCurrentChat] = useState("Adam");
-    const [showTime, setShowTime] = useLocalStorage("showTime", true)
-    function login(name) {
-        setUsername(name)
-    }
-    function addContact(name) {
-        setConversations(prev => {
-            if (prev[name]) return prev;
-            return {
-                ...prev, [name]: []
-            };
-        });
-    }
-    function addMessage(chatName, text, author = username) {
-        setConversations((prev) => ({
-            ...prev,
-            [chatName]: [
-                ...(prev[chatName] || []),
-                { id: Date.now() + Math.random(), text, author, edited: false, time: Date.now() }
-            ]
-        }));
-    }
-    function editMessage(chatName, messageId, newText) {
-        setConversations(prev => {
-            const updatedChat = prev[chatName].map(msg =>
-                msg.id === messageId
-                    ? { ...msg, text: newText, edited: true }
-                    : msg
-            );
-            return { ...prev, [chatName]: updatedChat };
-        });
-    }
+export default function AppProvider({ children }) {
     return (
-        <AppContext.Provider value={{
-            username,
-            setUsername,
-            login,
-            status,
-            setStatus,
-            conversations,
-            currentChat,
-            setCurrentChat,
-            addContact,
-            addMessage,
-            editMessage,
-            showTime,
-            setShowTime
-        }}>
-            {children}
-        </AppContext.Provider>
+        <UserProvider>
+            <ChatProvider>
+                <ConversationsProvider>
+                    {children}
+                </ConversationsProvider>
+            </ChatProvider>
+        </UserProvider>
     );
 }

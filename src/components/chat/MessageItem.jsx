@@ -1,11 +1,15 @@
 import React from "react";
 import { useState, useContext, useEffect, useRef } from "react";
-import { AppContext } from "../../context/AppProvider";
 import Avatar from "../avatar/Avatar";
 import "../../styles/components/MessageItem.scss";
+import { ConversationsContext } from "../../context/ConversationsContext";
+import { UserContext } from "../../context/UserContext";
+import { ChatContext } from "../../context/ChatContext";
 
 function MessageItem({ message }) {
-    const { editMessage, showTime, currentChat, username } = useContext(AppContext);
+    const { showTime, username } = useContext(UserContext);
+    const { editMessage } = useContext(ConversationsContext);
+    const { currentChat } = useContext(ChatContext);
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(message.text);
     const inputRef = useRef(null)

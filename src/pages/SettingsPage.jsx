@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../context/AppContext";
+import { UserContext } from "../context/UserContext";
+import "../styles/pages/SettingsPage.scss"
 
 export default function SettigsPage() {
     const navigate = useNavigate();
-    const { showTime, setShowTime } = useContext(AppContext);
+    const { showTime, setShowTime } = useContext(UserContext);
     return (
-        <div>
+        <div className="settings-page">
             <h1>Ustawienia</h1>
             <label>
                 <input

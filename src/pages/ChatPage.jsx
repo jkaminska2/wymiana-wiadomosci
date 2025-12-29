@@ -1,4 +1,5 @@
-import { AppContext } from "../context/AppContext";
+import { ChatContext } from "../context/ChatContext";
+import { ConversationsContext } from "../context/ConversationsContext";
 import { useContext } from "react";
 import ChatHeader from "../components/chat/ChatHeader";
 import MessageList from "../components/chat/MessageList";
@@ -7,7 +8,8 @@ import ContactList from "../components/chat/ContactList";
 import useChatBot from "../hooks/useChatBot";
 
 export default function ChatPage() {
-    const { conversations, currentChat } = useContext(AppContext);
+    const { conversations } = useContext(ConversationsContext);
+    const { currentChat } = useContext(ChatContext)
     const messages = conversations[currentChat] ?? [];
     useChatBot();
     return (

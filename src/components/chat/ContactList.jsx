@@ -1,10 +1,14 @@
-import { AppContext } from "../../context/AppContext";
+import { ConversationsContext } from "../../context/ConversationsContext";
+import { ChatContext } from "../../context/ChatContext";
+import { UserContext } from "../../context/UserContext";
 import { useContext, useState } from "react";
 import Avatar from "../avatar/Avatar";
 import "../../styles/components/ContactList.scss";
 
 export default function ContactList() {
-    const { conversations, currentChat, setCurrentChat, addContact, status, username } = useContext(AppContext);
+    const { conversations, addContact } = useContext(ConversationsContext);
+    const { currentChat, setCurrentChat } = useContext(ChatContext);
+    const { username, status } = useContext(UserContext);
     const [newName, setNewName] = useState("");
     function handleAdd() {
         if (!newName.trim()) return;

@@ -1,12 +1,12 @@
 import React, { useContext, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../../context/AppProvider"
+import { UserContext } from "../../context/UserContext";
 import Avatar from "../avatar/Avatar";
 import "../../styles/components/ChatHeader.scss";
 
 function ChatHeader() {
     const navigate = useNavigate();
-    const { username, status, setStatus } = useContext(AppContext);
+    const { username, status, setStatus } = useContext(UserContext);
     const goToSettings = useCallback(() => {
         navigate("/settings");
     }, [navigate]);

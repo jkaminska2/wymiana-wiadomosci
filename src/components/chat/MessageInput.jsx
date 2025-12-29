@@ -1,18 +1,22 @@
 import { useState, useContext, useRef, useCallback } from "react";
-import { AppContext } from "../../context/AppProvider";
+import { ChatContext } from "../../context/ChatContext";
+import { ConversationsContext } from "../../context/ConversationsContext";
+import { UserContext } from "../../context/UserContext";
 import EmojiPicker from "./EmojiPicker";
 import "../../styles/components/MessageInput.scss";
 
 export default function MessageInput() {
     const [message, setMessage] = useState("");
-    const { addMessage, currentChat } = useContext(AppContext);
+    const { addMessage } = useContext(ConversationsContext);
+    const { currentChat } = useContext(ChatContext);
+    const { username } = useContext(UserContext);
     const inputRef = useRef(null);
     const handleSubmit = useCallback((event) => {
         event.preventDefault();
         if (!message.trim()) return;
-        addMessage(currentChat, message);
+        addMessage(currentChat, message, username);
         setMessage("");
-    }, [message, currentChat, addMessage]);
+    }, [message, currentChat, addMessage, username]);
     const handleEmoji = useCallback((emoji) => {
         setMessage(prev => prev + emoji);
         inputRef.current?.focus();
