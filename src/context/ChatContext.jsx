@@ -4,6 +4,7 @@ import { UserContext } from "./UserContext";
 export const ChatContext = createContext();
 export function ChatProvider({ children }) {
   const [currentChat, setCurrentChat] = useState("Adam");
+  const [isTyping, setIsTyping] = useState(false);
   const [isContactsOpen, setIsContactsOpen] = useState(false);
   const { username } = useContext(UserContext);
   useEffect(() => {
@@ -28,7 +29,9 @@ export function ChatProvider({ children }) {
         resetChat,
         isContactsOpen,
         setIsContactsOpen,
-        ensureValidChat
+        ensureValidChat,
+        isTyping,
+        setIsTyping
       }}
     >
       {children}
