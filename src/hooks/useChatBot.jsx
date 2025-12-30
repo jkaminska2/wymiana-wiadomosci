@@ -23,5 +23,6 @@ export default function useChatBot() {
             setIsTyping(false);
         }, 1500);
         return () => clearTimeout(timeout);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 }
