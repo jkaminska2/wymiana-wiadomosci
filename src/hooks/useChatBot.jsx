@@ -5,7 +5,7 @@ import { ChatContext } from "../context/ChatContext";
 import { fetchBotReply } from "../api/bot";
 
 export default function useChatBot() {
-    const { addMessage, lastUserMessageId } = useContext(ConversationsContext);
+    const { addMessage, lastUserMessageId, resetLastUserMessageId } = useContext(ConversationsContext);
     const { currentChat } = useContext(ChatContext);
     const { data } = useQuery({
         queryKey: ["botReply", lastUserMessageId],
@@ -18,6 +18,7 @@ export default function useChatBot() {
         if (!data) return;
         const timeout = setTimeout(() => {
             addMessage(currentChat, data, currentChat);
+            resetLastUserMessageId();
         }, 1500);
         return () => clearTimeout(timeout);
     }, [data]);

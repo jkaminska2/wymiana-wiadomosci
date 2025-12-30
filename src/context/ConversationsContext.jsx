@@ -49,6 +49,9 @@ export function ConversationsProvider({ children }) {
         setConversations(initial);
         localStorage.setItem("conversations", JSON.stringify(initial));
     }
+    function resetLastUserMessageId() {
+        setLastUserMessageId(null);
+    }
     return (
         <ConversationsContext.Provider value={{
             conversations,
@@ -56,7 +59,8 @@ export function ConversationsProvider({ children }) {
             addMessage,
             editMessage,
             resetConversations,
-            lastUserMessageId
+            lastUserMessageId,
+            resetLastUserMessageId
         }}>
             {children}
         </ConversationsContext.Provider>
