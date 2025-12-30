@@ -14,6 +14,12 @@ export function ChatProvider({ children }) {
   const resetChat = () => {
     setCurrentChat("");
   };
+  const ensureValidChat = (conversations) => {
+    const names = Object.keys(conversations);
+    if (!names.includes(currentChat)) {
+        setCurrentChat(names[0] || "");
+    }
+  };
   return (
     <ChatContext.Provider
       value={{
@@ -22,6 +28,7 @@ export function ChatProvider({ children }) {
         resetChat,
         isContactsOpen,
         setIsContactsOpen,
+        ensureValidChat
       }}
     >
       {children}

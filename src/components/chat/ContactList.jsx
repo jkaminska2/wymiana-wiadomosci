@@ -9,7 +9,7 @@ import "../../styles/components/ContactList.scss";
 
 export default function ContactList() {
     const { pushError } = useContext(ErrorContext);
-    const { conversations, addContact } = useContext(ConversationsContext);
+    const { conversations, addContact, deleteConversation } = useContext(ConversationsContext);
     const { currentChat, setCurrentChat, isContactsOpen } = useContext(ChatContext);
     const { username, status } = useContext(UserContext);
     const [newName, setNewName] = useState("");
@@ -45,7 +45,21 @@ export default function ContactList() {
                                 size={32}
                                 status={name === username ? status : "dostępny"}
                             />
-                            {name}
+                            <span className="contact-name">{name}</span>
+                            <button
+                                className="delete-contact"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (window.confirm(`Usunąć rozmowę z ${name}?`)) {
+                                        deleteConversation(name);
+                                        if (name === currentChat) {
+                                            setCurrentChat(Object.keys(conversations)[0] || "");
+                                        }
+                                    }
+                                }}
+                            >
+                                ✕
+                            </button>
                         </li>
                     ))}
                 </ul>

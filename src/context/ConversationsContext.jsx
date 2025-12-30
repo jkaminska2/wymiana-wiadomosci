@@ -45,6 +45,13 @@ export function ConversationsProvider({ children }) {
     const resetLastUserMessageId = () => {
         setLastUserMessageId(null);
     }
+    const deleteConversation = (name) => {
+        setConversations(prev => {
+            const updated = { ...prev };
+            delete updated[name];
+            return updated;
+        });
+    };
     return (
         <ConversationsContext.Provider value={{
             conversations,
@@ -54,6 +61,7 @@ export function ConversationsProvider({ children }) {
             resetConversations,
             lastUserMessageId,
             resetLastUserMessageId,
+            deleteConversation
         }}>
             {children}
         </ConversationsContext.Provider>
