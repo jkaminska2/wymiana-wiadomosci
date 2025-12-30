@@ -1,5 +1,6 @@
 export function createError(message, details = {}) {
     return {
+        id: Date.now() + Math.random(),
         message,
         details,
         timestamp: Date.now(),

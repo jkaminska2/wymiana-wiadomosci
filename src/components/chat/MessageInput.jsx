@@ -11,13 +11,13 @@ export default function MessageInput() {
     const { currentChat } = useContext(ChatContext);
     const { username } = useContext(UserContext);
     const inputRef = useRef(null);
-    const handleSubmit = useCallback((event) => {
-        event.preventDefault();
+    const handleSubmit = useCallback((e) => {
+        e.preventDefault();
         if (!message.trim()) return;
         addMessage(currentChat, message, username);
         setMessage("");
     }, [message, currentChat, addMessage, username]);
-    const handleEmoji = useCallback((emoji) => {
+    const handleEmoji = useCallback(emoji => {
         setMessage(prev => prev + emoji);
         inputRef.current?.focus();
     }, []);
@@ -26,7 +26,7 @@ export default function MessageInput() {
             <input 
                 ref={inputRef}
                 value={message}
-                onChange={(event) => setMessage(event.target.value)}
+                onChange={(e) => setMessage(e.target.value)}
                 placeholder="Napisz wiadomość..."
             />
             <EmojiPicker onSelect={handleEmoji} />

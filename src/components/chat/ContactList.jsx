@@ -1,9 +1,9 @@
+import { useContext, useState } from "react";
 import { ConversationsContext } from "../../context/ConversationsContext";
 import { ChatContext } from "../../context/ChatContext";
 import { UserContext } from "../../context/UserContext";
-import { handleError } from "../../errors/errorHandler";
 import { ErrorContext } from "../../context/ErrorContext";
-import { useContext, useState } from "react";
+import { handleError } from "../../errors/errorHandler";
 import Avatar from "../avatar/Avatar";
 import "../../styles/components/ContactList.scss";
 
@@ -15,21 +15,18 @@ export default function ContactList() {
     const [newName, setNewName] = useState("");
     function handleAdd() {
         if (!newName.trim()) {
-            const err = handleError("Nie można dodać pustego kontaktu");
-            pushError(err);
+            pushError(handleError("Nie można dodać pustego kontaktu"));
             return;
         }
         if (conversations[newName]) {
-            const err = handleError(`Kontakt "${newName}" już istnieje`);
-            pushError(err);
+            pushError(handleError(`Kontakt "${newName}" już istnieje`));
             return;
         }
         try {
             addContact(newName);
             setNewName("");
         } catch (e) {
-            const err = handleError("Błąd podczas dodawania kontaktu", e);
-            pushError(err);
+            pushError(handleError("Błąd podczas dodawania kontaktu", e));
         }
     }
     return (
@@ -43,20 +40,20 @@ export default function ContactList() {
                             className={name === currentChat ? "active" : ""}
                             onClick={() => setCurrentChat(name)}
                         >
-                            <Avatar name={name} size={32} status={name === username ? status : "dostępny"} />
+                            <Avatar
+                                name={name}
+                                size={32}
+                                status={name === username ? status : "dostępny"}
+                            />
                             {name}
                         </li>
                     ))}
                 </ul>
-                <div>
+                <div className="add-contact">
                     <input
                         value={newName}
-                        onChange={event => setNewName(event.target.value)}
-                        onKeyDown={event => {
-                            if (event.key === "Enter") {
-                                handleAdd();
-                            }
-                        }}
+                        onChange={e => setNewName(e.target.value)}
+                        onKeyDown={e => e.key === "Enter" && handleAdd()}
                         placeholder="Nowy kontakt"
                     />
                     <button onClick={handleAdd}>Dodaj</button>

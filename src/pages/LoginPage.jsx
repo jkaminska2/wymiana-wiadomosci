@@ -15,7 +15,7 @@ export default function LoginPage() {
             setError("Nick musi mieć co najmniej 3 znaki");
             return;
         }
-        setUsername(name);
+        setUsername(trimmed);
         navigate("/chat");
     }
     return (

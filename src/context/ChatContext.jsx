@@ -3,26 +3,28 @@ import { UserContext } from "./UserContext";
 
 export const ChatContext = createContext();
 export function ChatProvider({ children }) {
-    const [currentChat, setCurrentChat] = useState("Adam");
-    const [isContactsOpen, setIsContactsOpen] = useState(false);
-    const { username } = useContext(UserContext);
-    useEffect(() => {
-        if (username && !currentChat) {
-            setCurrentChat("Adam");
-        }
-    }, [username, currentChat]);
-    function resetChat() {
-        setCurrentChat("");
+  const [currentChat, setCurrentChat] = useState("Adam");
+  const [isContactsOpen, setIsContactsOpen] = useState(false);
+  const { username } = useContext(UserContext);
+  useEffect(() => {
+    if (username && !currentChat) {
+      setCurrentChat("Adam");
     }
-    return (
-        <ChatContext.Provider value={{ 
-            currentChat, 
-            setCurrentChat, 
-            resetChat,
-            isContactsOpen,
-            setIsContactsOpen
-        }}>
-            {children}
-        </ChatContext.Provider>
-    );
+  }, [username, currentChat]);
+  const resetChat = () => {
+    setCurrentChat("");
+  };
+  return (
+    <ChatContext.Provider
+      value={{
+        currentChat,
+        setCurrentChat,
+        resetChat,
+        isContactsOpen,
+        setIsContactsOpen,
+      }}
+    >
+      {children}
+    </ChatContext.Provider>
+  );
 }

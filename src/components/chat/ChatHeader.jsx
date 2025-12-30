@@ -26,7 +26,7 @@ function ChatHeader() {
                     <h2>{username}</h2>
                     <label className="status-select">
                         Status:
-                        <select value={status} onChange={event => setStatus(event.target.value)}>
+                        <select value={status} onChange={e => setStatus(e.target.value)}>
                             <option value="dostępny">Dostępny</option>
                             <option value="zaraz wracam">Zaraz wracam</option>
                             <option value="niedostępny">Niedostępny</option>
@@ -40,5 +40,4 @@ function ChatHeader() {
         </header>
     );
 }
-
 export default React.memo(ChatHeader);

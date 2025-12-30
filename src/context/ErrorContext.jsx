@@ -6,7 +6,7 @@ export function ErrorProvider({ children }) {
     const pushError = useCallback((error) => {
         setErrors(prev => [...prev, error]);
         setTimeout(() => {
-            setErrors(prev => prev.filter(event => event.id !== error.id));
+            setErrors(prev => prev.filter(e => e.id !== error.id));
         }, 3000);
     }, []);
     return (

@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import Avatar from "../avatar/Avatar";
 import "../../styles/components/MessageItem.scss";
 import { ConversationsContext } from "../../context/ConversationsContext";
@@ -17,20 +16,18 @@ function MessageItem({ message }) {
     useEffect(() => {
         setText(message.text);
     }, [message.text]);
-    function save() {
+    const save = () => {
         if (!text.trim()) return;
         editMessage(currentChat, message.id, text);
         setIsEditing(false);
-    }
-    function cancel() {
+    };
+    const cancel = () => {
         setText(message.text);
         setIsEditing(false);
-    }
+    };
     return (
         <li className={`message-item ${isMine ? "mine" : "theirs"}`}>
-            {!isMine && (
-                <Avatar name={message.author} size={32} status="dostępny" />
-            )}
+            {!isMine && <Avatar name={message.author} size={32} status="dostępny" />}
             <div className="chat-side">
                 {isMine && !isEditing && (
                     <button 
@@ -49,10 +46,10 @@ function MessageItem({ message }) {
                             <input
                                 ref={inputRef}
                                 value={text} 
-                                onChange={event => setText(event.target.value)} 
-                                onKeyDown={event => {
-                                    if (event.key === "Enter") {
-                                        event.preventDefault();
+                                onChange={e => setText(e.target.value)} 
+                                onKeyDown={e => {
+                                    if (e.key === "Enter") {
+                                        e.preventDefault();
                                         save();
                                     }
                                 }}
@@ -83,5 +80,4 @@ function MessageItem({ message }) {
         </li>
     );
 }
-
 export default React.memo(MessageItem);

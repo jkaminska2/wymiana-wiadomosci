@@ -6,7 +6,7 @@ import { ConversationsContext } from "../context/ConversationsContext";
 import "../styles/pages/SettingsPage.scss"
 
 
-export default function SettigsPage() {
+export default function SettingsPage() {
     const navigate = useNavigate();
     const { showTime, setShowTime, logout } = useContext(UserContext);
     const { resetConversations } = useContext(ConversationsContext);

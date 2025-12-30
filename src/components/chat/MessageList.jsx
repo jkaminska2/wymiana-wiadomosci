@@ -24,5 +24,4 @@ function MessageList({ messages }) {
         </div>
     );
 }
-
 export default React.memo(MessageList);

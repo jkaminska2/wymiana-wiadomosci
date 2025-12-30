@@ -14,13 +14,11 @@ function EmojiPicker({ onSelect }) {
                 const data = await res.json();
                 setEmojiList(data.slice(0,100));
             } catch (err) {
-                const error = handleError("Nie udało się pobrać emoji", err);
-                pushError(error);
+                pushError(handleError("Nie udało się pobrać emoji", err));
             }
         }
         loadEmoji();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [pushError]);
     const toggleOpen = useCallback(() => {
         setOpen(prev => !prev);
     }, []);
@@ -48,5 +46,4 @@ function EmojiPicker({ onSelect }) {
         </div>
     );
 }
-
 export default React.memo(EmojiPicker);

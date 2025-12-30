@@ -9,13 +9,13 @@ export function ConversationsProvider({ children }) {
     const [conversations, setConversations] = useLocalStorage("conversations", {
         "Adam": []
     });
-    function addContact(name) {
+    const addContact = name => {
         setConversations(prev => {
             if (prev[name]) return prev;
             return { ...prev, [name]: [] };
         });
     }
-    function addMessage(chatName, text, author) {
+    const addMessage = (chatName, text, author) => {
         const newMessage = {
             id: Date.now() + Math.random(),
             text,
@@ -25,31 +25,24 @@ export function ConversationsProvider({ children }) {
         };
         setConversations(prev => ({
             ...prev,
-            [chatName]: [
-                ...(prev[chatName] || []),
-                newMessage
-            ]
+            [chatName]: [...(prev[chatName] || []), newMessage],
         }));
         if (author === username) {
             setLastUserMessageId(newMessage.id);
         }
-    }
-    function editMessage(chatName, messageId, newText) {
+    };
+    const editMessage = (chatName, messageId, newText) => {
         setConversations(prev => {
             const updatedChat = prev[chatName].map(msg =>
-                msg.id === messageId
-                    ? { ...msg, text: newText, edited: true }
-                    : msg
+                msg.id === messageId ? { ...msg, text: newText, edited: true } : msg
             );
             return { ...prev, [chatName]: updatedChat };
         });
-    }
-    function resetConversations() {
-        const initial = { Adam: [] };
-        setConversations(initial);
-        localStorage.setItem("conversations", JSON.stringify(initial));
-    }
-    function resetLastUserMessageId() {
+    };
+    const resetConversations = () => {
+        setConversations({ Adam: [] });
+    };
+    const resetLastUserMessageId = () => {
         setLastUserMessageId(null);
     }
     return (
@@ -60,7 +53,7 @@ export function ConversationsProvider({ children }) {
             editMessage,
             resetConversations,
             lastUserMessageId,
-            resetLastUserMessageId
+            resetLastUserMessageId,
         }}>
             {children}
         </ConversationsContext.Provider>

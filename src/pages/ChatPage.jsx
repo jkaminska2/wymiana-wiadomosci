@@ -16,7 +16,7 @@ export default function ChatPage() {
     return (
         <>
             <ChatHeader />
-            <div className= "chat-layout">
+            <div className="chat-layout">
                 <ContactList />
                 <div className="message-area">
                     <MessageList messages={messages} />

@@ -73,7 +73,7 @@
     line-height: 1.3;
     opacity: 0;
     transform: translateY(6px);
-    animation: messageFadeIn 0.25s ease forwards;
+    animation: messageFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes messageFadeIn {
@@ -83,7 +83,7 @@
     }
     to {
         opacity: 1;
-        tranform: translateY(0);
+        transform: translateY(0);
     }
 }
 
@@ -147,7 +147,7 @@
 }
 
 .message-item.mine .edit-button {
-    opacity: 0
+    opacity: 0;
 }
     
 .message-item.mine:hover .edit-button {
