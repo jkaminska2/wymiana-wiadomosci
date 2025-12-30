@@ -3,3 +3,21 @@ $gray: #e4e6eb;
 $light-gray: #f0f2f5;
 $radius: 18px;
 $border: 1px solid #d0d0d0;
+
+:root {
+    --bg: #f0f2f5;
+    --text: #111;
+    --panel: #ffffff;
+    --border: #d0d0d0;
+    --panel-hover: #f0f0f0;
+    --panel-active: #d6e8ff;
+}
+
+[data-theme="dark"] {
+    --bg: #1e1e1e;
+    --text: #e6e6e6;
+    --panel: #2a2a2a;
+    --border: #444;
+    --panel-hover: #333;
+    --panel-active: #004a99;
+}

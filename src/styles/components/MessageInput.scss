@@ -5,16 +5,18 @@
     display: flex;
     align-items: center;
     padding: 10px;
-    border-top: 1px solid #ccc;
-    background: white;
+    border-top: 1px solid var(--border);
+    background: var(--panel);
 
     input {
         flex: 1;
         padding: 10px 14px;
         border-radius: 20px;
-        border: 1px solid #ccc;
+        border: 1px solid var(--border);
         font-size: 14px;
         outline: none;
+        background: var(--bg);
+        color: var(--text);
 
         &:focus {
             border-color: $blue;

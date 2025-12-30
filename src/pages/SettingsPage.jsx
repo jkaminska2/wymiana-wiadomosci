@@ -8,7 +8,7 @@ import "../styles/pages/SettingsPage.scss"
 
 export default function SettingsPage() {
     const navigate = useNavigate();
-    const { showTime, setShowTime, logout } = useContext(UserContext);
+    const { showTime, setShowTime, logout, theme, setTheme } = useContext(UserContext);
     const { resetConversations } = useContext(ConversationsContext);
     const { resetChat } = useContext(ChatContext);
     return (
@@ -21,6 +21,14 @@ export default function SettingsPage() {
                     onChange={event => setShowTime(event.target.checked)} 
                 />
                 Pokaż godzinę wysłania wiadomości
+            </label>
+            <label>
+                <input 
+                    type="checkbox"
+                    checked={theme === "dark"}
+                    onChange={e => setTheme(e.target.checked ? "dark" : "light")}
+                />
+                Tryb ciemny
             </label>
             <button onClick={() => navigate("/chat")}>
                 Powrót

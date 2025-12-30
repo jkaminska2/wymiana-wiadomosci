@@ -3,8 +3,8 @@
 
 .contact-list {
     width: 0;
-    border-right: $border;
-    background: white;
+    border-right: 1px solid var(--border);
+    background: var(--panel);
     overflow: hidden;
     flex-shrink: 0;
     transition: width 0.28s cubic-bezier(0.25, 0.1, 0.25, 1),
@@ -47,11 +47,11 @@
         transition: background 0.15s ease;
 
         &:hover {
-            background: $light-gray;
+            background: var(--panel-hover);
         }
 
         &.active {
-            background: color.adjust($blue, $lightness: 40%);
+            background: var(--panel-active);
             font-weight: bold;
         }
 
@@ -90,8 +90,10 @@
     input {
         width: 100%;
         padding: 6px;
+        background: var(--bg);
+        color: var(--text);
         border-radius: 6px;
-        border: 1px solid #ccc;
+        border: 1px solid var(--border);
         margin-top: 10px;
         font-size: 14px;
     }

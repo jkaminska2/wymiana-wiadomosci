@@ -1,11 +1,15 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export const UserContext = createContext();
 export function UserProvider({ children }) {
+    const [theme, setTheme] = useLocalStorage("theme", "light");
     const [username, setUsername] = useLocalStorage("username", "");
     const [status, setStatus] = useLocalStorage("status", "dostępny");
     const [showTime, setShowTime] = useLocalStorage("showTime", true);
+    useEffect(() => {
+        document.body.setAttribute("data-theme", theme);
+    }, [theme]);
     function login(name) {
         setUsername(name);
     }
@@ -22,7 +26,9 @@ export function UserProvider({ children }) {
             setStatus,
             showTime,
             setShowTime,
-            logout
+            logout,
+            theme,
+            setTheme
         }}>
             {children}
         </UserContext.Provider>
