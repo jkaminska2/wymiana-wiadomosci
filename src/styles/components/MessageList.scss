@@ -1,8 +1,10 @@
+@use "../variables" as *;
+
 .chat-window {
     flex-grow: 1;
     overflow-y: auto;
     padding: 10px;
-    background: #f0f2f5;
+    background: $light-gray;
     display: flex;
     flex-direction: column;
 

@@ -1,3 +1,5 @@
+@use "../variables" as *;
+
 .chat-header {
     display: flex;
     align-items: center;
@@ -16,7 +18,7 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        flex-shrink: 0 !important;
+        flex-shrink: 0;
     }
 
     .toggle-contacts {
@@ -27,7 +29,7 @@
         cursor: pointer;
         padding: 4px 8px;
         border-radius: 6px;
-        flex-shrink: 0 !important;
+        flex-shrink: 0;
         transition: background 0.2s ease;
 
         &:hover {
@@ -36,7 +38,7 @@
     }
 
     .avatar {
-        flex-shrink: 0 !important;
+        flex-shrink: 0;
     }
 
     .user-info {
@@ -74,7 +76,7 @@
                 }
 
                 &:focus {
-                    border-color: #007bff;
+                    border-color: $blue;
                     outline: none;
                     background: white;
                 }
@@ -95,7 +97,7 @@
     }
 
     .settings-button {
-        background: #007bff;
+        background: $blue;
         color: white;
         border: none;
         padding: 8px 14px;
