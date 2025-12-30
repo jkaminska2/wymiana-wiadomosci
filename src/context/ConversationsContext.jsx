@@ -1,8 +1,11 @@
-import { createContext } from "react";
+import { createContext, useState, useContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { UserContext } from "./UserContext";
 
 export const ConversationsContext = createContext();
 export function ConversationsProvider({ children }) {
+    const { username } = useContext(UserContext);
+    const [lastUserMessageId, setLastUserMessageId] = useState(null);
     const [conversations, setConversations] = useLocalStorage("conversations", {
         "Adam": []
     });
@@ -13,19 +16,23 @@ export function ConversationsProvider({ children }) {
         });
     }
     function addMessage(chatName, text, author) {
+        const newMessage = {
+            id: Date.now() + Math.random(),
+            text,
+            author,
+            edited: false,
+            time: Date.now() 
+        };
         setConversations(prev => ({
             ...prev,
             [chatName]: [
                 ...(prev[chatName] || []),
-                {
-                    id: Date.now() + Math.random(),
-                    text,
-                    author,
-                    edited: false,
-                    time: Date.now()
-                }
+                newMessage
             ]
         }));
+        if (author === username) {
+            setLastUserMessageId(newMessage.id);
+        }
     }
     function editMessage(chatName, messageId, newText) {
         setConversations(prev => {
@@ -48,7 +55,8 @@ export function ConversationsProvider({ children }) {
             addContact,
             addMessage,
             editMessage,
-            resetConversations
+            resetConversations,
+            lastUserMessageId
         }}>
             {children}
         </ConversationsContext.Provider>
