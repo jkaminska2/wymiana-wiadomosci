@@ -10,7 +10,7 @@ import "../styles/pages/ChatPage.scss"
 
 export default function ChatPage() {
     const { conversations } = useContext(ConversationsContext);
-    const { currentChat } = useContext(ChatContext)
+    const { currentChat, isContactsOpen } = useContext(ChatContext)
     const messages = conversations[currentChat] ?? [];
     useChatBot();
     return (
@@ -18,7 +18,7 @@ export default function ChatPage() {
             <ChatHeader />
             <div className="chat-layout">
                 <ContactList />
-                <div className="message-area">
+                <div className={`message-area ${isContactsOpen ? "contacts-open" : ""}`}>
                     <MessageList messages={messages} />
                     <MessageInput />
                 </div>
