@@ -21,7 +21,7 @@ export default function useChatBot() {
             addMessage(currentChat, data, currentChat);
             resetLastUserMessageId();
             setIsTyping(false);
-        }, 1500);
+        }, 2000);
         return () => clearTimeout(timeout);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);

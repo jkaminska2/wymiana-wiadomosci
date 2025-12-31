@@ -25,6 +25,7 @@ export default function ContactList() {
         try {
             addContact(newName);
             setNewName("");
+            setCurrentChat(newName);
         } catch (e) {
             pushError(handleError("Błąd podczas dodawania kontaktu", e));
         }
@@ -52,8 +53,13 @@ export default function ContactList() {
                                     e.stopPropagation();
                                     if (window.confirm(`Usunąć rozmowę z ${name}?`)) {
                                         deleteConversation(name);
-                                        if (name === currentChat) {
-                                            setCurrentChat(Object.keys(conversations)[0] || "");
+                                        const remaining = Object.keys(conversations).filter(c => c !== name);
+                                        if (remaining.length > 0) {
+                                            if (currentChat === name) {
+                                                setCurrentChat(remaining[0]);
+                                            }
+                                        } else {
+                                            setCurrentChat("Adam");
                                         }
                                     }
                                 }}
